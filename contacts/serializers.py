@@ -8,6 +8,7 @@ class ContactSerializer(serializers.Serializer):
     name = serializers.CharField(max_length=80)
     telephone = serializers.CharField(max_length=16, allow_blank=True)
     email = serializers.CharField(max_length=80, allow_blank=True)
+    created_date = serializers.DateField(format="%d-%m-%Y", required=False)
 
     def create(self, user, validated_data):
         return Contact.objects.create(user=user, **validated_data)

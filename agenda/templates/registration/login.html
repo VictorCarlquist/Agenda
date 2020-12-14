@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+  {% if form.errors %}
+    <p>Usuário ou senha inválido</p>
+  {% endif %}
+  
+  {% if next %}
+    {% if user.is_authenticated %}
+      <p>Você não tem permissão para acessar essa página</p>
+    {% else %}
+      <p>Realize login.</p>
+    {% endif %}
+  {% endif %}
+
+    <div class="login">
+      <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Usuário</label>
+            {{ form.username }}
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          {{ form.password }}
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <input class="btn btn-primary" type="submit" value="Login"/>
+        <input type="hidden" name="next" value="{{ next }}" />
+      </form>
+    </div>
+
+  {% endblock %}
